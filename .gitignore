@@ -6,3 +6,4 @@ postgres_data
 **/node_modules
 **/db.sqlite3
 **/media
+*.pyc
