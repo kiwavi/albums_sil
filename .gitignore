@@ -5,3 +5,4 @@ postgres_data
 **/venv
 **/node_modules
 **/db.sqlite3
+**/media
