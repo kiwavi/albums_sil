@@ -1,0 +1,7 @@
+*~
+.gitignore~
+postgres_data
+.log
+**/venv
+**/node_modules
+**/db.sqlite3
