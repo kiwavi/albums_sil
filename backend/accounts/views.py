@@ -10,6 +10,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.utils.translation import gettext as _
 from .models import MyUser
+from authemail.models import send_multi_format_email
 
 # Create your views here.
 
