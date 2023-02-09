@@ -1,8 +1,8 @@
 from rest_framework import serializers
 from .models import Photos, Album
+from accounts.models import MyUser
 
 class AlbumSerializer(serializers.ModelSerializer):
-    user = serializers.StringRelatedField()
     class Meta:
         model = Album
         fields = (
@@ -11,9 +11,8 @@ class AlbumSerializer(serializers.ModelSerializer):
             "user",
         )
 
+
 class PhotosSerializer(serializers.ModelSerializer):
-    # in order for stringrelatedfield to work there must be str definition on the model
-    album = serializers.StringRelatedField()
     class Meta:
         model = Photos
         fields = (
@@ -22,3 +21,13 @@ class PhotosSerializer(serializers.ModelSerializer):
             "photo_title",
             "image",
         )
+
+
+class UsersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MyUser
+        fields = (
+            'id',
+            'email',
+        )
+
