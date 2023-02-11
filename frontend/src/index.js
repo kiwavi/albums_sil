@@ -7,11 +7,6 @@ import {store} from './redux/store';
 import {Provider} from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor } from './redux/store';
-import axios from "axios";
-
-if (localStorage.getItem('token')) {
-    axios.defaults.headers.common["Authorization"] = "Token " + localStorage.getItem('token');
-}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

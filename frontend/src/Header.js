@@ -8,10 +8,11 @@ import {NotificationManager} from 'react-notifications';
 
 
 export default function Header () {
-    const logged = useSelector((state) => state.isLogged);
+    const logged = useSelector((state) => state.logged.isLogged);
     const dispatch = useDispatch();
     const [isNavOpen, setIsNavOpen] = useState(false);   
-        
+    console.log(logged);
+    
     function LogUserOut () {
         axios.get(
             'api/accounts/logout'
@@ -21,6 +22,8 @@ export default function Header () {
             dispatch(logoutusername());
             dispatch(logout());
             NotificationManager.success('Logged out successfully','Logged Out',2000);
+            window.localStorage.removeItem('users');
+            window.localStorage.removeItem('users_albums');
         });
 	setIsNavOpen((prev) => !prev);
     }
@@ -67,7 +70,7 @@ export default function Header () {
                   </li>
                   <li className="border-b border-gray-400 my-8">
                     {
-                        logged ? <button onClick={LogUserOut}> Logout </button> : <Link to="/login"> Login </Link>
+                        logged ? <button onClick={LogUserOut}> Logout </button> : <Link to="/login" onClick={() => setIsNavOpen((prev) => !prev)}> Login </Link>
                     }
                   </li>
                   <li className="border-b border-gray-400 my-8">
