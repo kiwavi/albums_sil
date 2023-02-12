@@ -1,23 +1,27 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import BounceLoader from "react-spinners/BounceLoader";
+import {Link} from 'react-router-dom';
+
 
 export default function Home () {
     const [users, setUsers] = useState([]);
     const [users_albums, setUserAlbums] = useState([]);
+
+    
     const [loading, setLoading] = useState(true);
             
     function fetchUsers () {        
         axios.get('api/users').then(
-            res => {                   
+            res => {
                 const users = [];
                 const emails = [];
                 let promises = [];
                 for (let i = 0; i < res.data.length; i++){
                     promises.push(
-                        axios.get('/api/albums/?user__email='.concat(encodeURI(res.data[i]['email']))).then(response => {
+                        axios.get('/api/albums/?user__username='.concat(encodeURI(res.data[i]['username']))).then(response => {
                             users.push(response.data.length);
-                            emails.push(res.data[i]['email']);
+                            emails.push(res.data[i]['username']);
                         }),
                     );
                 }
@@ -49,7 +53,7 @@ export default function Home () {
                     users.map(result =>
                         <div>
                           <ul>
-                            <li key={result.id}> {result}  </li>
+                            <li key={result.id}> <Link to={"/users/".concat(result)}> {result} </Link> </li>
                           </ul>
                         </div>                    
                     )
@@ -61,7 +65,7 @@ export default function Home () {
                     users_albums.map(result =>
                         <div>
                           <ul>
-                            <li key={result.id}> {result}  </li>
+                            <li key={result}> {result}  </li>
                           </ul>
                         </div>                    
                     )

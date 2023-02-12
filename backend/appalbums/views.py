@@ -19,7 +19,7 @@ class AlbumViewSet(viewsets.ModelViewSet):
     serializer_class = AlbumSerializer
     permission_classes = [AllowAny]
     filter_backends = (filters.DjangoFilterBackend,)
-    filterset_fields = ['user__email']
+    filterset_fields = ['user__username']
     queryset = Album.objects.all()
 
 
