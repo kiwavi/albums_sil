@@ -11,6 +11,7 @@ import RequireAuth from './requireAuth';
 import 'react-notifications/lib/notifications.css';
 import { NotificationContainer } from 'react-notifications';
 import UserDetails from './userDetails';
+import AlbumDetails from './albumDetails';
 
 import axios from 'axios';
 
@@ -25,11 +26,12 @@ export default function App() {
               <Header/>
               <Routes>
                 <Route path="/" element={<IndexPage/>}>  </Route>
-                <Route path="/users/:email" element={<RequireAuth> <UserDetails/> </RequireAuth>}>  </Route>
+                <Route path="/users/:username" element={<RequireAuth> <UserDetails/> </RequireAuth>}>  </Route>
                 <Route path="/login" element={<Login/>}>  </Route>
                 <Route path="/home" element={<RequireAuth> <Home/> </RequireAuth> }> </Route>
                 <Route path="/signup" element={<Signup/>}>  </Route>
-                <Route path="*" element={<PageNotFound/>}>  </Route>                
+                <Route path="/users/:username/:album" element={<RequireAuth> <AlbumDetails/> </RequireAuth> }> </Route>
+                <Route path="*" element={<PageNotFound/>}>  </Route>
               </Routes>
             </div>
             <Footer/>

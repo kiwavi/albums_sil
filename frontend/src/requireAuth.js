@@ -4,7 +4,7 @@ import {useNavigate} from 'react-router-dom';
 
 export default function RequireAuth (props) {
     let navigate = useNavigate();
-    const logged = useSelector((state) => state.logged.isLogged);
+    const logged = useSelector((state) => state.isLogged);
     const current_pathname = window.location.pathname;
 
     useEffect(

@@ -8,10 +8,9 @@ import {NotificationManager} from 'react-notifications';
 
 
 export default function Header () {
-    const logged = useSelector((state) => state.logged.isLogged);
+    const logged = useSelector((state) => state.isLogged);
     const dispatch = useDispatch();
-    const [isNavOpen, setIsNavOpen] = useState(false);   
-    console.log(logged);
+    const [isNavOpen, setIsNavOpen] = useState(false); 
     
     function LogUserOut () {
         axios.get(

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from 'axios';
-import {useParams} from 'react-router-dom';
+import {useParams, Link} from 'react-router-dom';
 import BounceLoader from "react-spinners/BounceLoader";
+
 
 export default function UserDetails() {
     const [userdata, setUserData] = useState([]);
@@ -10,7 +11,7 @@ export default function UserDetails() {
     const email_param = useParams();
     
     function fetchUserAlbums () {
-        axios.get('/api/albums/?user__username='.concat(encodeURI(email_param.email))).then(
+        axios.get('/api/albums/?user__username='.concat(encodeURI(email_param.username))).then(
             res => {
                 console.log(res.data);
                 setUserData(res.data);
@@ -36,7 +37,7 @@ export default function UserDetails() {
                   userdata.map(result =>
                       <div>
                         <ul>
-                          <li key={result.id}> {result.album_title} </li>
+                          <li key={result.id}> <Link to={('/',result.album_title)}> {result.album_title} </Link> </li>
                         </ul>
                       </div>
                   )

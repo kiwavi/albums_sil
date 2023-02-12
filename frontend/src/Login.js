@@ -48,7 +48,14 @@ export default function Login () {
                                       setSubmitted(false);
                                       NotificationManager.success('Successful login','Login success',2000);
                                       setLoading(false);
-                                      navigate('/home');
+                                      if (window.location.href.includes('next')) {
+                                          const curr_url = new URL(window.location.href);
+                                          const next_url = curr_url.searchParams.get('next');
+                                          navigate(next_url);
+                                      }
+                                      else {
+                                          navigate('/home');
+                                      }
                                   }
                               );
                           }
