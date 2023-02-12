@@ -37,7 +37,7 @@ export default function UserDetails() {
                   userdata.map(result =>
                       <div>
                         <ul>
-                          <li key={result.id}> <Link to={('/',result.album_title)}> {result.album_title} </Link> </li>
+                          <li key={result.id}> <Link to={window.location.pathname.concat('/',result.album_title)}> {result.album_title} </Link> </li>
                         </ul>
                       </div>
                   )
