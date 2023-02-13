@@ -61,12 +61,17 @@ export default function Login () {
                           }
                       ).catch(
                           error => {
-                              console.log(error['response']);
+                              if (error['message'] === 'Network Error') {
+                                  NotificationManager.error('Internal System Error','Server Error', 2000);
+                                  setLoading(false);
+                                  setSubmitted(false);
+                              };
+                              
                               if (error['response']['data']['detail'] === 'Unable to login with provided credentials.') {
                                   NotificationManager.error('Incorrect details','Incorrect',2000);
-                              }
-                              setLoading(false);
-                              setSubmitted(false);
+                                  setLoading(false);
+                                  setSubmitted(false);
+                              }                              
                           }
                       );
         }
