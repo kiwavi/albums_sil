@@ -3,7 +3,6 @@ import axios from 'axios';
 import {useParams, Link} from 'react-router-dom';
 import BounceLoader from "react-spinners/BounceLoader";
 
-
 export default function UserDetails() {
     const [userdata, setUserData] = useState([]);
     const [loading, setLoading] =  useState(true);
