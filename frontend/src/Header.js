@@ -23,6 +23,17 @@ export default function Header () {
             NotificationManager.success('Logged out successfully','Logged Out',2000);
             window.localStorage.removeItem('users');
             window.localStorage.removeItem('users_albums');
+        }).catch(error => {
+            if (error['message'] === 'Network Error') {
+                NotificationManager.error('Internal System Error','Server Error', 2000);
+            };
+            
+            if (error['message'] === 'Request failed with status code 401') {
+                tokenDel();
+                dispatch(logoutemail());
+                dispatch(logoutusername());
+                dispatch(logout());
+            };            
         });
 	setIsNavOpen((prev) => !prev);
     }

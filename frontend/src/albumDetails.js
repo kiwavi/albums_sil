@@ -2,10 +2,16 @@ import {useEffect, useState} from 'react';
 import axios from 'axios';
 import {useParams, Link} from 'react-router-dom';
 import BounceLoader from "react-spinners/BounceLoader";
+import {logout,logoutemail, logoutusername} from './redux/logged';
+import {useDispatch} from 'react-redux';
+import {tokenDel} from './setToken';
+import {NotificationManager} from 'react-notifications';
 
 export default function AlbumDetails () {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true); 
+
+    const dispatch = useDispatch();
     
     const album = useParams();
         
@@ -15,7 +21,18 @@ export default function AlbumDetails () {
                 console.log(res.data);
                 setData(res.data);
             }
-        );
+        ).catch(error => {
+            if (error['message'] === 'Network Error') {
+                NotificationManager.error('Internal System Error','Server Error', 2000);
+            };
+            
+            if (error['message'] === 'Request failed with status code 401') {
+                tokenDel();
+                dispatch(logoutemail());
+                dispatch(logoutusername());
+                dispatch(logout());
+            };            
+        });
     }
 
     

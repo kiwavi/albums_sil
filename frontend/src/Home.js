@@ -2,12 +2,16 @@ import {useState, useEffect} from 'react';
 import axios from 'axios';
 import BounceLoader from "react-spinners/BounceLoader";
 import {Link} from 'react-router-dom';
-
+import {NotificationManager} from 'react-notifications';
+import {logout,logoutemail, logoutusername} from './redux/logged';
+import {useDispatch} from 'react-redux';
+import {tokenDel} from './setToken';
 
 export default function Home () {
     const [users, setUsers] = useState([]);
     const [users_albums, setUserAlbums] = useState([]);
 
+    const dispatch = useDispatch();
     
     const [loading, setLoading] = useState(true);
             
@@ -31,7 +35,19 @@ export default function Home () {
                                                   setUserAlbums(users);
                                                  });                
             }
-        );
+        ).catch(error => {
+            console.log(error);
+            if (error['message'] === 'Network Error') {
+                NotificationManager.error('Internal System Error','Server Error', 2000);
+            };
+            
+            if (error['message'] === 'Request failed with status code 401') {
+                tokenDel();
+                dispatch(logoutemail());
+                dispatch(logoutusername());
+                dispatch(logout());
+            };            
+        });
     }
     
     useEffect(() => {
