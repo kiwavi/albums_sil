@@ -49,13 +49,18 @@ export default function AlbumDetails () {
             </div>
             :
             <div>
-              <p> Albums and its photos </p>
+              <p className='flex justify-center text-2xl text-bold mt-4'> Photos in {album.album} </p>
               {
                   data.map(result =>
                       <div>
-                        <ul>
-                          <li key={result.id}>
-                            <Link to={window.location.pathname.concat('/',result.id)}> {result.photo_title}  </Link>
+                        <ul className="list-none flex justify-center">
+                          <li key={result.id} className="flex flex-col mt-5">
+
+                            {/* <Link className='mb-3'  to={window.location.pathname.concat('/',result.id)}> <p className='flex justify-center text-green-700 hover:text-sky-400 lg:w-52 text-lg lg:text-xl'> {result.photo_title} </p> </Link> */}
+
+                            <Link className='mb-3'  to={window.location.pathname.concat('/',result.id)}> <p className='inline flex justify-center text-green-700 hover:text-sky-400 text-lg text-lg lg:text-xl'> {result.photo_title} </p> </Link>
+                            
+                            <img src={result.image} alt={result.photo_title} className="inline flex justify-center object-scale-down h-96 w-80 lg:w-80 lg:h-96"/>                            
                           </li>
                         </ul>
                       </div>

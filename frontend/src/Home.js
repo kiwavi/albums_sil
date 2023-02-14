@@ -26,6 +26,18 @@ export default function Home () {
                         axios.get('/api/albums/?user__username='.concat(encodeURI(res.data[i]['username']))).then(response => {
                             users.push(response.data.length);
                             emails.push(res.data[i]['username']);
+                        }).catch(error => {
+                            console.log(error);
+                            if (error['message'] === 'Network Error') {
+                                NotificationManager.error('Internal System Error','Server Error', 2000);
+                            };
+                            
+                            if (error['message'] === 'Request failed with status code 401') {
+                                tokenDel();
+                                dispatch(logoutemail());
+                                dispatch(logoutusername());
+                                dispatch(logout());
+                            };            
                         }),
                     );
                 }
@@ -62,14 +74,20 @@ export default function Home () {
             <BounceLoader color="#36d7b7" />
           </div>
           :
-          <div className=''>
-            <div className='flex'>
+          <div>
+            <p className='text-2xl lg:text-3xl text-center text-bold mt-4'> Users and their albums  </p>
+            <div className='flex justify-center lg:justify-around mb-4 mt-4'>
+              <p className='w-24 lg:text-center text-xl mr-3 lg:ml-48'> Username  </p>
+              <p className='w-24 lg:text-center text-xl ml-3 lg:mr-48'> Albums </p>
+            </div>
+            
+            <div className='flex justify-center lg:justify-around'>
               <div>
                 {
                     users.map(result =>
                         <div>
-                          <ul>
-                            <li key={result.id}> <Link to={"/users/".concat(result)}> {result} </Link> </li>
+                          <ul className='w-24 mb-3 lg:ml-48'>
+                            <li key={result.id}> <Link to={"/users/".concat(result)}> <p className='text-start text-lg text-green-700 hover:text-sky-400'> {result} </p></Link> </li>
                           </ul>
                         </div>                    
                     )
@@ -80,8 +98,8 @@ export default function Home () {
                 {
                     users_albums.map(result =>
                         <div>
-                          <ul>
-                            <li key={result}> {result}  </li>
+                          <ul className='w-24 text-center mb-3 lg:mr-48'>
+                            <li key={result}> <p className='text-lg'> {result} </p> </li>
                           </ul>
                         </div>                    
                     )

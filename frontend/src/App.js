@@ -21,8 +21,8 @@ axios.defaults.baseURL = "http://127.0.0.1:8000";
 export default function App() {
     return (
         <Router>
-          <div class="min-h-screen flex flex-col">
-            <div class="main flex-grow">
+          <div className="min-h-screen flex flex-col bg-gray-100">
+            <div className="main flex-grow">
               <NotificationContainer/>
               <Header/>
               <Routes>

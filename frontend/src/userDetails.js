@@ -48,13 +48,13 @@ export default function UserDetails() {
               <BounceLoader color="#36d7b7" />
             </div>
             :
-            <div>
-              <p> {email_param.email} albums </p>
+            <div>                            
+              <p className="flex justify-center text-center text-bold text-2xl mx-8 mt-6"> Albums by {email_param.username} </p>
               {
                   userdata.map(result =>
-                      <div>
-                        <ul>
-                          <li key={result.id}> <Link to={window.location.pathname.concat('/',result.album_title)}> {result.album_title} </Link> </li>
+                      <div className="mt-4">
+                        <ul className="list-decimal flex justify-center">
+                          <li key={result.id}> <Link to={window.location.pathname.concat('/',result.album_title)}> <p className=' inline mt-4 mb-4 text-green-700 hover:text-sky-400 text-center w-24 lg:w-52 text-lg lg:text-xl'> {result.album_title} </p> </Link> </li>
                         </ul>
                       </div>
                   )
