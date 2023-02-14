@@ -86,7 +86,7 @@ export default function Home () {
                 {
                     users.map(result =>
                         <div>
-                          <ul className='w-24 mb-3 lg:ml-48'>
+                          <ul className='w-24 mb-6 lg:ml-48'>
                             <li key={result.id}> <Link to={"/users/".concat(result)}> <p className='text-start text-lg text-green-700 hover:text-sky-400'> {result} </p></Link> </li>
                           </ul>
                         </div>                    
@@ -98,7 +98,7 @@ export default function Home () {
                 {
                     users_albums.map(result =>
                         <div>
-                          <ul className='w-24 text-center mb-3 lg:mr-48'>
+                          <ul className='w-24 text-center mb-6 lg:mr-48'>
                             <li key={result}> <p className='text-lg'> {result} </p> </li>
                           </ul>
                         </div>                    
