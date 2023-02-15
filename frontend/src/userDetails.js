@@ -48,6 +48,7 @@ export default function UserDetails() {
               <BounceLoader color="#36d7b7" />
             </div>
             :
+            userdata.length ? 
             <div>                            
               <p className="flex justify-center text-center text-bold text-2xl mx-8 mt-6"> Albums by {email_param.username} </p>
               {
@@ -60,6 +61,8 @@ export default function UserDetails() {
                   )
               }
             </div>
+            :
+            <p className='flex justify-center text-2xl text-bold mt-4'> No albums </p>
           }
         </div>
     );    

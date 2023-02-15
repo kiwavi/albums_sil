@@ -3,7 +3,7 @@ import {logout,logoutemail, logoutusername} from './redux/logged';
 import {useDispatch, useSelector} from 'react-redux';
 import {tokenDel} from './setToken';
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {NotificationManager} from 'react-notifications';
 
 
@@ -11,6 +11,7 @@ export default function Header () {
     const logged = useSelector((state) => state.isLogged);
     const dispatch = useDispatch();
     const [isNavOpen, setIsNavOpen] = useState(false); 
+    const [home, setHome] = useState(false);
     
     function LogUserOut () {
         axios.get(
@@ -37,6 +38,13 @@ export default function Header () {
         });
 	setIsNavOpen((prev) => !prev);
     }
+
+    useEffect(() => {
+        if (window.location.pathname === '/home') {
+            setHome(true);
+        }
+    },[]);
+
     
     return (
         <div className="flex items-center justify-between py-8 bg-yellow-400">
@@ -83,9 +91,6 @@ export default function Header () {
                         logged ? <button onClick={LogUserOut}> Logout </button> : <Link to="/login" onClick={() => setIsNavOpen((prev) => !prev)}> Login </Link>
                     }
                   </li>
-                  <li className="border-b border-gray-400 my-8">
-                    <Link to="/about" onClick={() => setIsNavOpen((prev) => !prev)}> About </Link>
-                  </li>
                 </ul>
               </div>
             </section>
@@ -93,16 +98,13 @@ export default function Header () {
             <ul className="DESKTOP-MENU hidden space-x-8 lg:flex">
               <li>
                 {
-                    logged ? <Link to="/home"> Home </Link>  : <p>  </p>
+                    logged ? <Link to="/home"> Home </Link> : <p>  </p>
                 }
               </li>
               <li>
                 {
                     logged ? <button onClick={LogUserOut}> Logout </button> : <Link to="/login"> Login </Link>
                 }
-              </li>
-              <li>
-                <Link to="/about"> About </Link>
               </li>
             </ul>
           </nav>

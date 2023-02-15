@@ -74,6 +74,7 @@ export default function Home () {
             <BounceLoader color="#36d7b7" />
           </div>
           :
+          users.length ? 
           <div>
             <p className='text-2xl lg:text-3xl text-center text-bold mt-4'> Users and their albums  </p>
             <div className='flex justify-center lg:justify-around mb-4 mt-4'>
@@ -109,6 +110,8 @@ export default function Home () {
             </div>
             
           </div>
+          :          
+          <p className='flex justify-center text-2xl lg:text-3xl text-center text-bold mt-4'>  </p>
           }
         </div>
     );

@@ -6,6 +6,7 @@ import { login,logusername,logemail } from './redux/logged';
 import { useNavigate } from "react-router-dom";
 import BounceLoader from "react-spinners/BounceLoader";
 import {NotificationManager} from 'react-notifications';
+import {Link} from 'react-router-dom';
 
 export default function Login () {
     const [email, setEmail] = useState('');
@@ -106,21 +107,7 @@ export default function Login () {
                         </div>
                         
                         <div class="flex justify-between items-center mb-6">
-                          <div class="form-group form-check">
-                            <input
-                              type="checkbox"
-              class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                              id="exampleCheck3"
-                  />
-                            <label class="form-check-label inline-block text-gray-800 mr-4" for="exampleCheck2"
-                            >Remember me</label
-                            >
-                          </div>
-                          <a
-                            href="#!"
-              class="text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
-                          >Forgot password?</a
-                          >
+                          <Link to="/signup"> <p className='text-blue-400 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out'> I have no account </p> </Link>
                         </div>
                         {
                             submitted ? 
