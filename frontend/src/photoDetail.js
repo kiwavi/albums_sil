@@ -49,6 +49,7 @@ export default function PhotoDetail() {
         }).then(
             res => {
                 setPhotoTitle(res.data['photo_title']);
+                NotificationManager.success('Updated Successfully','Update success', 2000);
             }
         ).catch(error => {
             if (error['message'] === 'Request failed with status code 401') {
