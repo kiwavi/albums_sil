@@ -77,7 +77,7 @@ export default function PhotoDetail() {
           <div>
             <p className="flex justify-center text-center text-bold text-2xl mx-8 mt-6"> {photo_title} </p>
             <div className='flex flex-col items-center justify-center'>
-              <img src={image_url} alt={photo_title} className="flex justify-center object-scale-down h-96 w-80 lg:w-80 lg:h-96 mt-5"/>
+              <img src={image_url} alt={photo_title} className="flex justify-center object-scale-down h-96 w-80 lg:w-1/4 lg:h-1/4 mt-5"/>
               
               <form class="flex flex-col items-center justify-center mt-6" onSubmit={editPhotoTitle}>
                 <div class="mb-6">

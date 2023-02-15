@@ -70,7 +70,7 @@ export default function AlbumDetails () {
               
               <div className='hidden lg:block'>
                 { data.length % 2 === 0 ? 
-                  <div class="container grid grid-cols-2 gap-2 mx-auto">
+                  <div class="container grid grid-cols-2 gap-1 mx-auto">
                     {
                         data.map(result =>
                             <div>
@@ -127,7 +127,26 @@ export default function AlbumDetails () {
                     }
                   </div>
                   :
-                  data.length === 0 ?
+                  data.length % 2 === 1 ?
+                  <div class="container grid grid-cols-3 gap-2 mx-auto">
+                    {
+                        data.map(result =>
+                            <div>
+                              <ul className="list-none flex justify-center">
+                                <li key={result.id} className="flex flex-col mt-5">
+                                  
+                                  <Link className='mb-3'  to={window.location.pathname.concat('/',result.id)}> <p className='inline flex justify-center text-green-700 hover:text-sky-400 text-lg text-lg lg:text-xl'> {result.photo_title} </p> </Link>
+                                  
+                                  <img src={result.image} alt={result.photo_title} className="inline flex justify-center object-scale-down h-96 w-80 lg:w-80 lg:h-96"/>                            
+                                </li>
+                              </ul>
+                            </div>
+                        )
+                    }
+                  </div>
+                  :
+                  data.length === 0
+                  ?
                   <p> This album has no pictures </p>
                   :
                   <p> </p>              
