@@ -18,7 +18,6 @@ export default function AlbumDetails () {
     function fetchAlbumPhotos () {
         axios.get('/api/photos/?album__album_title='.concat(album.album)).then(
             res => {
-                console.log(res.data);
                 setData(res.data);
             }
         ).catch(error => {

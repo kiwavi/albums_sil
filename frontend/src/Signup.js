@@ -45,7 +45,6 @@ export default function Signup () {
                 username,
             }).then(
                 response => {
-                    console.log(response.data);
                     setSubmitted(false);
                     setLoading(false);
                     NotificationManager.success('Username created successfully','Signup success',2000);
@@ -53,7 +52,6 @@ export default function Signup () {
                 }
             ).catch(
                 error => {
-                    console.log(error['response']);
                     if (error['response']['data']['detail'] === 'Email address already taken.') {
                         NotificationManager.error('Email address exists','Email exists',2000);
                     }

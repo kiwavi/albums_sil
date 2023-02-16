@@ -17,9 +17,9 @@ export default function UserDetails() {
     const email_param = useParams();
     
     function fetchUserAlbums () {
+        // fetches the albums associated with a certain user
         axios.get('/api/albums/?user__username='.concat(encodeURI(email_param.username))).then(
             res => {
-                console.log(res.data);
                 setUserData(res.data);
             }
         ).catch(error => {

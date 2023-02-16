@@ -15,19 +15,19 @@ export default function Home () {
     
     const [loading, setLoading] = useState(true);
             
-    function fetchUsers () {        
+    function fetchUsers () {
+        // fetch the usernames and the number of albums they have
         axios.get('api/users').then(
             res => {
-                const users = [];
-                const emails = [];
+                const user_album_numbers = [];
+                const usernames = [];
                 let promises = [];
                 for (let i = 0; i < res.data.length; i++){
                     promises.push(
                         axios.get('/api/albums/?user__username='.concat(encodeURI(res.data[i]['username']))).then(response => {
-                            users.push(response.data.length);
-                            emails.push(res.data[i]['username']);
+                            user_album_numbers.push(response.data.length);
+                            usernames.push(res.data[i]['username']);
                         }).catch(error => {
-                            console.log(error);
                             if (error['message'] === 'Network Error') {
                                 NotificationManager.error('Internal System Error','Server Error', 2000);
                             };
@@ -43,12 +43,11 @@ export default function Home () {
                 }
                 
                 Promise.all(promises).then(() => {
-                                                  setUsers(emails);
-                                                  setUserAlbums(users);
+                                                  setUsers(usernames);
+                                                  setUserAlbums(user_album_numbers);
                                                  });                
             }
         ).catch(error => {
-            console.log(error);
             if (error['message'] === 'Network Error') {
                 NotificationManager.error('Internal System Error','Server Error', 2000);
             };

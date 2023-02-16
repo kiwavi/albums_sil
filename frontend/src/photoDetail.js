@@ -64,7 +64,6 @@ export default function PhotoDetail() {
     useEffect(() => {
         fetchPhoto();
         setLoading(false);
-        console.log(window.innerWidth);
     },[]);
     
     
@@ -75,7 +74,7 @@ export default function PhotoDetail() {
             <BounceLoader color="#36d7b7" />
           </div>
           :
-          <div>
+          <div className='mb-12'>
             <p className="flex justify-center text-center text-bold text-2xl mx-8 mt-6"> {photo_title} </p>
             <div className='flex flex-col items-center justify-center'>
               <img src={image_url} alt={photo_title} className="flex justify-center object-scale-down h-96 w-80 lg:w-1/4 lg:h-1/4 mt-5"/>

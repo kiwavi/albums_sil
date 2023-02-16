@@ -38,7 +38,6 @@ export default function Login () {
                        }
                       ).then(
                           response => {
-                              console.log(response.data);
                               const token = response.data["token"];
                               tokenSet(token);
                               axios.get('/api/accounts/profile').then(
