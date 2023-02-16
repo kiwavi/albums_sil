@@ -1,0 +1,13 @@
+/** @type {import('jest').Config} */
+const config = {
+  verbose: true,
+};
+
+module.exports = {
+    module.exports = {
+       "transform": {
+           "\\.[jt]sx?$": "babel-jest",
+           "\\.css$": "some-css-transformer",
+       },
+    };
+};

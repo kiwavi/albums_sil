@@ -73,8 +73,10 @@ export default function AlbumDetails () {
                   <p className='flex justify-center text-xl text-bold mt-4'> None </p>
                 }
               </div>
-              
+
+              {/* visible for large screens  */}
               <div className='hidden lg:block mb-12'>
+                {/* photos are 2 or a number divisible by 2 */}
                 { data.length % 2 === 0 ? 
                   <div class="container grid grid-cols-2 gap-1 mx-auto">
                     {
@@ -93,6 +95,7 @@ export default function AlbumDetails () {
                     }
                   </div>
                   :
+                  // photos are 3 or divisible by 3
                   data.length % 3 === 0 ? 
                   
                   <div class="container grid grid-cols-3 gap-2 mx-auto">
@@ -113,45 +116,53 @@ export default function AlbumDetails () {
                   </div>
                   
                   :
-                  
-                  data.length % 3 === 1 ?
-                  
-                  <div class="container grid grid-cols-1 gap-2 mx-auto">
-                    {
-                        data.map(result =>
-                            <div>
-                              <ul className="list-none flex justify-center">
-                                <li key={result.id} className="flex flex-col mt-5">
-                                  
-                                  <Link className='mb-3'  to={window.location.pathname.concat('/',result.id)}> <p className='inline flex justify-center text-green-700 hover:text-sky-400 text-lg text-lg lg:text-xl'> {result.photo_title} </p> </Link>
-                                  
-                                  <img src={result.image} alt={result.photo_title} className="inline flex justify-center object-scale-down h-96 w-80 lg:w-80 lg:h-96"/>                            
-                                </li>
-                              </ul>
-                            </div>
-                        )
-                    }
-                  </div>
-                  :
-                  data.length % 2 === 1 ?
 
-                  <div class="container grid grid-cols-3 gap-2 mx-auto">
+                  /* photos are an even number */
+                  data.length % 2 === 1 ?
+                  <div>
                     {
-                        data.map(result =>
+                        /* if it is just one photo */
+                        data.length === 1 ?
                             <div>
-                              <ul className="list-none flex justify-center">
-                                <li key={result.id} className="flex flex-col mt-5">
-                                  
-                                  <Link className='mb-3'  to={window.location.pathname.concat('/',result.id)}> <p className='inline flex justify-center text-green-700 hover:text-sky-400 text-lg text-lg lg:text-xl'> {result.photo_title} </p> </Link>
-                                  
-                                  <img src={result.image} alt={result.photo_title} className="inline flex justify-center object-scale-down h-96 w-80 lg:w-80 lg:h-96"/>                            
-                                </li>
-                              </ul>
+                              <div class="container grid grid-cols-1 gap-0 mx-auto">
+                                {
+                                    data.map(result =>
+                                        <div>
+                                          <ul className="list-none flex justify-center">
+                                            <li key={result.id} className="flex flex-col mt-5">
+                                              
+                                              <Link className='mb-3'  to={window.location.pathname.concat('/',result.id)}> <p className='inline flex justify-center text-green-700 hover:text-sky-400 text-lg text-lg lg:text-xl'> {result.photo_title} </p> </Link>
+                                              
+                                              <img src={result.image} alt={result.photo_title} className="inline flex justify-center object-scale-down h-96 w-80 lg:w-80 lg:h-96"/>                            
+                                            </li>
+                                          </ul>
+                                        </div>
+                                    )
+                                }
+                              </div>
                             </div>
-                        )
+                        :
+                        /* if photos are not 1 and are an even number */
+                        <div class="container grid grid-cols-3 gap-0 mx-auto">
+                          {
+                              data.map(result =>
+                                  <div>
+                                    <ul className="list-none flex justify-center">
+                                      <li key={result.id} className="flex flex-col mt-5">
+                                        
+                                        <Link className='mb-3'  to={window.location.pathname.concat('/',result.id)}> <p className='inline flex justify-center text-green-700 hover:text-sky-400 text-lg text-lg lg:text-xl'> {result.photo_title} </p> </Link>
+                                        
+                                        <img src={result.image} alt={result.photo_title} className="inline flex justify-center object-scale-down h-96 w-80 lg:w-80 lg:h-96"/>                            
+                                      </li>
+                                    </ul>
+                                  </div>
+                              )
+                          }
+                        </div>
                     }
                   </div>
                   :
+                  /* in case the album has no photos */
                   data.length === 0
                   ?
                   <p> This album has no pictures </p>

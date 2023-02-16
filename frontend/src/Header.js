@@ -11,7 +11,6 @@ export default function Header () {
     const logged = useSelector((state) => state.isLogged);
     const dispatch = useDispatch();
     const [isNavOpen, setIsNavOpen] = useState(false); 
-    const [home, setHome] = useState(false);
     
     function LogUserOut () {
         axios.get(
@@ -38,13 +37,6 @@ export default function Header () {
         });
 	setIsNavOpen((prev) => !prev);
     }
-
-    useEffect(() => {
-        if (window.location.pathname === '/home') {
-            setHome(true);
-        }
-    },[]);
-
     
     return (
         <div className="flex items-center justify-between py-8 bg-yellow-400">

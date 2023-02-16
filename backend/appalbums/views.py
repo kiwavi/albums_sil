@@ -8,11 +8,6 @@ import django_filters
 from django_filters.rest_framework import DjangoFilterBackend
 from django_filters import rest_framework as filters
 
-# Create your views here.
-
-# for the endpoint showing users, just create a serializer with the user model as the data and show name, username and email
-
-# Landing/index, login, home (users and number of albums they have), user (detailed list of the albums a user has), album detail (album information and photos), photo detail (the photo and a requirement to change the title).
 
 class AlbumViewSet(viewsets.ModelViewSet):
     # displays all albums

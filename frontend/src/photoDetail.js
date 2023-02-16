@@ -42,23 +42,39 @@ export default function PhotoDetail() {
 
     function editPhotoTitle(e) {
         e.preventDefault();
-        let url = '/api/photos/';
+        setSubmitted(true);
         
-        axios.patch(url.concat(param.id,'/'),{
-            photo_title: new_photo_title
-        }).then(
-            res => {
-                setPhotoTitle(res.data['photo_title']);
-                NotificationManager.success('Updated Successfully','Update success', 2000);
-            }
-        ).catch(error => {
-            if (error['message'] === 'Request failed with status code 401') {
-                tokenDel();
-                dispatch(logoutemail());
-                dispatch(logoutusername());
-                dispatch(logout());
-            };            
-        });       
+        if (new_photo_title.length > 50) {
+            NotificationManager.error('Exceeded maximum length','Limit to 50 characters',2000);
+            setSubmitted(false);
+            return;
+        }
+
+        else if (new_photo_title === photo_title) {
+            setSubmitted(false);
+            return;            
+        }
+        
+        else {
+            let url = '/api/photos/';        
+            axios.patch(url.concat(param.id,'/'),{
+                photo_title: new_photo_title
+            }).then(
+                res => {
+                    setPhotoTitle(res.data['photo_title']);
+                    NotificationManager.success('Updated Successfully','Update success', 2000);
+                    setSubmitted(false);
+                }
+            ).catch(error => {
+                if (error['message'] === 'Request failed with status code 401') {
+                    tokenDel();
+                    dispatch(logoutemail());
+                    dispatch(logoutusername());
+                    dispatch(logout());
+                    setSubmitted(false);
+                };            
+            });
+        }
     }
     
     useEffect(() => {
@@ -79,14 +95,15 @@ export default function PhotoDetail() {
             <div className='flex flex-col items-center justify-center'>
               <img src={image_url} alt={photo_title} className="flex justify-center object-scale-down h-96 w-80 lg:w-1/4 lg:h-1/4 mt-5"/>
               
-              <form class="flex flex-col items-center justify-center mt-6" onSubmit={editPhotoTitle}>
-                <div class="mb-6">
+              <form className="flex flex-col items-center justify-center mt-6" onSubmit={editPhotoTitle}>
+                <div className="mb-6">
                   <input className='w-52 lg:w-60 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' type="text" name="title" placeholder='Edit title'  onChange={(e) => setNewPhotoTitle(e.target.value)} required/>
                 </div>
+
                 { submitted ?
-                  <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-24" disabled> Edit </button>
+                  <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-24" disabled> Edit </button>
                   :
-                  <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-24 lg:w-44"> Edit </button>
+                  <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-24 lg:w-44"> Edit </button>
                 }
               </form>
               

@@ -16,7 +16,7 @@ export default function IndexPage () {
             :
             <p className="mx-4 mb-6 lg:flex lg:justify-center lg:text-lg"> <Link to="/login">  <p className='inline text-green-700 hover:text-sky-400'> Login </p> </Link> &nbsp;now to view the diversity of albums and pictures </p>
           }
-          <img src={AlbumPhoto} class="object-scale-down max-w-full h-auto" alt="..."/>
+          <img src={AlbumPhoto} className="object-scale-down max-w-full h-auto" alt="..."/>
         </div>
     );
 }

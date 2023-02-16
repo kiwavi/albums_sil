@@ -12,7 +12,7 @@ class Album(models.Model):
 
 
 class Photos(models.Model):
-    photo_title = models.CharField(max_length=30)
+    photo_title = models.CharField(max_length=50)
     album = models.ForeignKey(Album,on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images')
 
