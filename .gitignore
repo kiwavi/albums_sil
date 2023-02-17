@@ -7,3 +7,4 @@ postgres_data
 **/db.sqlite3
 **/media
 *.pyc
+**/.env.local
