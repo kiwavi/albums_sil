@@ -12,27 +12,21 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
-from decouple import config
-from decouple import Config, RepositoryEnv
-
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DOTENV_FILE = os.path.join(BASE_DIR, '.env.prod')
-env_config = Config(RepositoryEnv(DOTENV_FILE))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env_config.get('SECRET_KEY')
+SECRET_KEY = 'django-insecure-s@att&*vwcjp%kkd4aorx+b4r1qt$8#2h&yj@!s9(4aw@^(=@='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env_config.get('DEBUG')
+DEBUG = True
 
-ALLOWED_HOSTS = ['yanarana.com','www.yanarana.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -88,22 +82,10 @@ WSGI_APPLICATION = 'albumsproj.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'db',
-        'PORT': 5432
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -142,13 +124,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = '/django_static/'
-
-STATIC_ROOT = BASE_DIR / 'django_static'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static/'),
-]
+STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -166,30 +142,21 @@ REST_FRAMEWORK = {
 AUTH_USER_MODEL = 'accounts.MyUser'
 
 
-EMAIL_FROM = env_config.get('EMAIL_FROM')
-EMAIL_BCC = env_config.get('EMAIL_BCC')
-EMAIL_HOST = env_config.get('EMAIL_HOST')
-EMAIL_PORT = env_config.get('EMAIL_PORT')
-EMAIL_HOST_USER = env_config.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env_config.get('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = env_config.get('EMAIL_USE_TLS')
-EMAIL_USE_SSL = env_config.get('EMAIL_USE_SSL')
-AUTH_EMAIL_VERIFICATION = env_config.get('AUTH_EMAIL_VERIFICATION')
+EMAIL_FROM = os.environ.get('AUTHEMAIL_DEFAULT_EMAIL_FROM') or '<YOUR DEFAULT_EMAIL_FROM HERE>'
+EMAIL_BCC = os.environ.get('AUTHEMAIL_DEFAULT_EMAIL_BCC') or '<YOUR DEFAULT_EMAIL_BCC HERE>'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'rotpil101@gmail.com'
+EMAIL_HOST_PASSWORD = 'stmbagpsayymicva'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+AUTH_EMAIL_VERIFICATION = False
 
-MEDIA_URL = env_config.get('MEDIA_URL')
-MEDIA_ROOT = env_config.get('MEDIA_ROOT')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-CORS_ALLOWED_ORIGINS = [
-    'https://www.yanarana.com',
-    'https://yanarana.com',
+CORS_ALLOWED_ORIGINS =  [
+    'http://localhost:3000',
+    'http://127.0.0.1:8000'
 ]
-
-
-CORS_ORIGIN_WHITELIST = (
-    'https://www.yanarana.com',
-    'https://yanarana.com',
-    'http://localhost:8000',
-)
-
-CSRF_TRUSTED_ORIGINS = ['https://www.yanarana.com', 'https://yanarana.com']
