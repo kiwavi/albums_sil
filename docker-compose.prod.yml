@@ -50,7 +50,7 @@ services:
         image: docker.io/mailserver/docker-mailserver:latest
         container_name: mailserver
         hostname: ""
-        domainname: yanarana.com
+        domainname: cefris.com
         ports:
             - "25:25"
             - "143:143"

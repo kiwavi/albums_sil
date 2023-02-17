@@ -9,3 +9,4 @@ postgres_data
 *.pyc
 **/.env.local
 **/.env.prod
+**/certbot

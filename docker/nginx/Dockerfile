@@ -7,6 +7,7 @@ RUN npm ci --silent
 COPY ./frontend/ ./
 ENV CI=true
 RUN npm test
+ENV CI=''
 RUN npm run build
 
 # The second stage
