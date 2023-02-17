@@ -10,3 +10,4 @@ postgres_data
 **/.env.local
 **/.env.prod
 **/certbot
+*#*
