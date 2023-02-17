@@ -25,7 +25,7 @@ services:
     build:
       context: ./backend
     command : bash -c "python manage.py makemigrations && python manage.py migrate &&
-      python manage.py runserver 0.0.0.0:8000"
+      python manage.py runserver --settings albumsproj.settings_local 0.0.0.0:8000"
     ports:
       - "8000:8000"
     depends_on:
