@@ -1,0 +1,86 @@
+version: '2'
+
+services:
+    nginx: 
+        restart: unless-stopped
+        build:
+            context: .
+            dockerfile: ./docker/nginx/Dockerfile
+        ports:
+            - 80:80
+            - 443:443
+        volumes:
+            - static_volume:/app/backend/django_static
+            - media_volume:/app/backend/media
+            - ./docker/nginx/production:/etc/nginx/conf.d
+            - ./docker/nginx/certbot/conf:/etc/letsencrypt
+            - ./docker/nginx/certbot/www:/var/www/certbot
+        depends_on: 
+            - backend
+    certbot:
+        image: certbot/certbot
+        restart: unless-stopped
+        volumes:
+            - ./docker/nginx/certbot/conf:/etc/letsencrypt
+            - ./docker/nginx/certbot/www:/var/www/certbot
+        entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"       
+    backend:
+        restart: unless-stopped
+        build:
+            context: .
+            dockerfile: ./docker/backend/Dockerfile
+        entrypoint: /app/docker/backend/wsgi-entrypoint.sh
+        volumes:
+            - static_volume:/app/backend/django_static
+            - media_volume:/app/backend/media
+        expose:
+            - 8000        
+        depends_on: 
+            - db
+    db:
+        image: postgres:14.3
+        volumes:
+            - ./postgres_data:/var/lib/postgresql/data/
+        environment:
+            - POSTGRES_DB=postgres
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+
+    mailserver:
+        image: docker.io/mailserver/docker-mailserver:latest
+        container_name: mailserver
+        hostname: ""
+        domainname: yanarana.com
+        ports:
+            - "25:25"
+            - "143:143"
+            - "587:587"
+            - "993:993"
+
+        environment:
+            - ENABLE_SPAMASSASSIN=1
+            - SPAMASSASSIN_SPAM_TO_INBOX=1
+            - ENABLE_POSTGREY=1
+            - ENABLE_SASLAUTHD=0
+            - ONE_DIR=1
+            - DMS_DEBUG=0
+            - PERMIT_DOCKER=host
+            - SSL_TYPE=letsencrypt
+
+        volumes:
+            - /usr/local/docker/mailserver/mail-data/:/var/mail/
+            - /usr/local/docker/mailserver/mail-state/:/var/mail-state/
+            - /usr/local/docker/mailserver/mail-logs/:/var/log/mail/
+            - /usr/local/docker/mailserver/config/:/tmp/docker-mailserver/
+            - /etc/localtime:/etc/localtime:ro
+            - ./docker/nginx/certbot/conf:/etc/letsencrypt
+
+        cap_add:
+            - NET_ADMIN
+            - SYS_PTRACE
+        restart: always
+
+volumes:
+    static_volume: {}
+    media_volume: {}    
+    postgres_data:

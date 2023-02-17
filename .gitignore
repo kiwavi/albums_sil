@@ -8,3 +8,4 @@ postgres_data
 **/media
 *.pyc
 **/.env.local
+**/.env.prod
