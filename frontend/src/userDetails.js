@@ -56,9 +56,9 @@ export default function UserDetails() {
               <p className="flex justify-center text-center text-bold text-2xl mx-8 mt-6"> Albums by {email_param.username} </p>
               {
                   userdata.map(result =>
-                      <div className="mt-4">
-                        <ul className="list-decimal flex justify-center">
-                          <li key={result.id}> <Link to={window.location.pathname.concat('/',result.album_title)}> <p className=' inline mt-4 mb-4 text-green-700 hover:text-sky-400 text-center w-24 lg:w-52 text-lg lg:text-xl'> {result.album_title} </p> </Link> </li>
+                      <div className="mt-8">
+                        <ul className="list-disc flex justify-center">
+                          <li key={result.id} className='w-40 lg:w-52'> <Link to={window.location.pathname.concat('/',result.album_title)}> <p className='inline mt-4 mb-4 text-green-700 hover:text-sky-400 text-lg lg:text-xl'> {result.album_title} </p> </Link> </li>
                         </ul>
                       </div>
                   )
