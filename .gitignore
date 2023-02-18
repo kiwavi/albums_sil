@@ -11,3 +11,4 @@ postgres_data
 **/.env.prod
 **/certbot
 *#*
+emails.text
