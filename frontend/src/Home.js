@@ -13,10 +13,11 @@ export default function Home () {
 
     const dispatch = useDispatch();
     
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
             
     function fetchUsers () {
         // fetch the usernames and the number of albums they have
+        setLoading(true);
         axios.get('api/users').then(
             res => {
                 const user_album_numbers = [];
@@ -30,9 +31,11 @@ export default function Home () {
                         }).catch(error => {
                             if (error['message'] === 'Network Error') {
                                 NotificationManager.error('Internal System Error','Server Error', 2000);
+                                setLoading(false);
                             };
                             
                             if (error['message'] === 'Request failed with status code 401') {
+                                setLoading(false);
                                 tokenDel();
                                 dispatch(logoutemail());
                                 dispatch(logoutusername());
@@ -45,9 +48,11 @@ export default function Home () {
                 Promise.all(promises).then(() => {
                                                   setUsers(usernames);
                                                   setUserAlbums(user_album_numbers);
-                                                 });                
+                });
+                setLoading(false);
             }
         ).catch(error => {
+            setLoading(false);
             if (error['message'] === 'Network Error') {
                 NotificationManager.error('Internal System Error','Server Error', 2000);
             };
@@ -63,7 +68,6 @@ export default function Home () {
     
     useEffect(() => {
         fetchUsers();
-        setLoading(false);
     },[]);
     
     return (

@@ -10,24 +10,28 @@ import {NotificationManager} from 'react-notifications';
 
 export default function UserDetails() {
     const [userdata, setUserData] = useState([]);
-    const [loading, setLoading] =  useState(true);
+    const [loading, setLoading] =  useState(false);
     
     const dispatch = useDispatch();
     
     const email_param = useParams();
     
     function fetchUserAlbums () {
+        setLoading(true);
         // fetches the albums associated with a certain user
         axios.get('/api/albums/?user__username='.concat(encodeURI(email_param.username))).then(
             res => {
                 setUserData(res.data);
+                setLoading(false);
             }
         ).catch(error => {
+            setLoading(false);
             if (error['message'] === 'Network Error') {
                 NotificationManager.error('Internal System Error','Server Error', 2000);
             };
 
             if (error['message'] === 'Request failed with status code 401') {
+                setLoading(false);
                 tokenDel();
                 dispatch(logoutemail());
                 dispatch(logoutusername());
@@ -38,7 +42,6 @@ export default function UserDetails() {
 
     useEffect(() => {
         fetchUserAlbums();
-        setLoading(false);
     },[]);
     
     return (        

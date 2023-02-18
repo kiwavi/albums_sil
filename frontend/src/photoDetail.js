@@ -10,7 +10,7 @@ import {NotificationManager} from 'react-notifications';
 export default function PhotoDetail() {
     const [photo_title, setPhotoTitle] = useState('');
     const [image_url, setImageUrl] = useState('');
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [new_photo_title, setNewPhotoTitle] = useState('');
     const [submitted, setSubmitted] = useState(false);
     
@@ -19,13 +19,16 @@ export default function PhotoDetail() {
     const param = useParams();
     
     function fetchPhoto() {
+        setLoading(true);
         axios.get('/api/photos/'.concat(param.id)).then(
             res => {
                 setPhotoTitle(res.data['photo_title']);
                 setImageUrl(res.data['image']);
                 setSubmitted(false);
+                setLoading(false);
             }
         ).catch(error => {
+            setLoading(false);
             if (error['message'] === 'Network Error') {
                 NotificationManager.error('Internal System Error','Server Error', 2000);
             };
@@ -56,6 +59,7 @@ export default function PhotoDetail() {
         }
         
         else {
+            setLoading(true);
             let url = '/api/photos/';        
             axios.patch(url.concat(param.id,'/'),{
                 photo_title: new_photo_title
@@ -64,8 +68,10 @@ export default function PhotoDetail() {
                     setPhotoTitle(res.data['photo_title']);
                     NotificationManager.success('Updated Successfully','Update success', 2000);
                     setSubmitted(false);
+                    setLoading(false);
                 }
             ).catch(error => {
+                setLoading(false);
                 if (error['message'] === 'Request failed with status code 401') {
                     tokenDel();
                     dispatch(logoutemail());
@@ -79,7 +85,6 @@ export default function PhotoDetail() {
     
     useEffect(() => {
         fetchPhoto();
-        setLoading(false);
     },[]);
     
     

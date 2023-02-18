@@ -9,18 +9,21 @@ import {NotificationManager} from 'react-notifications';
 
 export default function AlbumDetails () {
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true); 
+    const [loading, setLoading] = useState(false); 
 
     const dispatch = useDispatch();
     
     const album = useParams();
         
     function fetchAlbumPhotos () {
+        setLoading(true);
         axios.get('/api/photos/?album__album_title='.concat(album.album)).then(
             res => {
                 setData(res.data);
+                setLoading(false);
             }
         ).catch(error => {
+            setLoading(false);
             if (error['message'] === 'Network Error') {
                 NotificationManager.error('Internal System Error','Server Error', 2000);
             };
@@ -37,7 +40,6 @@ export default function AlbumDetails () {
     
     useEffect(() => {
         fetchAlbumPhotos();
-        setLoading(false);
     },[]);
     
     return (
