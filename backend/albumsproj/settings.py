@@ -174,7 +174,7 @@ EMAIL_USE_TLS = env_config.get('EMAIL_USE_TLS')
 AUTH_EMAIL_VERIFICATION = False
 
 MEDIA_URL = env_config.get('MEDIA_URL')
-MEDIA_ROOT = env_config.get('MEDIA_ROOT')
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 CORS_ALLOWED_ORIGINS = [

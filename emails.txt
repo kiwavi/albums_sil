@@ -1,0 +1,3 @@
+creating the email
+
+sudo docker run --rm --volume "/usr/local/docker/mailserver/config/:/tmp/docker-mailserver/" mailserver/docker-mailserver setup email add sam@yanarana.com Ndovu%ni%kuu.
