@@ -9,11 +9,30 @@ jobs:
       - run:
           name: install dependencies
           command: npm install
+	  path: frontend
+	  
       - run:
           name: run tests
           command: npm run
-      - store_test_results:
-          path: test_results
+
+      - run:
+          name: create virtual env
+          command: python -m venv venv
+	  path: backend
+	  
+      - run:
+          name: install deps
+          command: pip install -r requirements.txt
+
+      - run:
+          name: make migrations
+          command: python manage.py makemigrations && python manage.py migrate
+	  path: backend
+	  
+      - run:
+          name: runserver
+          command: python manage.py runserver
+	  path: backend
 
 workflows:
   build-and-test-workflow:
