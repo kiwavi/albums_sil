@@ -80,18 +80,18 @@ export default function Home () {
           users.length ? 
           <div>
             <p className='text-2xl lg:text-3xl text-center text-bold mt-4'> Users and their albums  </p>
-            <div className='flex justify-center lg:justify-around mb-4 mt-4'>
-              <p className='w-24 lg:text-center text-xl mr-3 lg:ml-48'> Username  </p>
-              <p className='w-24 lg:text-center text-xl ml-3 lg:mr-48'> Albums </p>
-            </div>
+            {/* <div className='hidden lg:visible flex justify-center lg:justify-around mb-4 mt-4'> */}
+            {/*   <p className='w-24 lg:text-center text-xl mr-3 lg:ml-48'> Username  </p> */}
+            {/*   <p className='w-24 lg:text-center text-xl ml-3 lg:mr-48'> Albums </p> */}
+            {/* </div> */}
             
-            <div className='flex justify-center lg:justify-around'>
+            <div className='flex justify-center lg:justify-around mt-12'>
               <div>
                 {
                     users.map(result =>
                         <div>
-                          <ul className='w-24 mb-6 lg:ml-48'>
-                            <li key={result.id}> <Link to={"/users/".concat(result)}> <p className='text-start text-lg text-green-700 hover:text-sky-400'> {result} </p></Link> </li>
+                          <ul className='mb-6 lg:ml-48'>
+                            <li key={result.id}> <Link to={"/users/".concat(result)} className="w-36"> <p className='text-start text-lg text-green-700 hover:text-sky-400'> {result} </p> </Link> </li>
                           </ul>
                         </div>                    
                     )
