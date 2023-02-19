@@ -9,21 +9,21 @@ jobs:
       - run:
           name: install dependencies
           command: npm install
-	  path: frontend	  
+	  path: frontend
       - run:
           name: run tests
           command: npm run
       - run:
           name: create virtual env
           command: python -m venv venv
-	  path: backend	  
+	  path: backend
       - run:
           name: install deps
           command: pip install -r requirements.txt
       - run:
           name: make migrations
           command: python manage.py makemigrations && python manage.py migrate
-	  path: backend	  
+	  path: backend
       - run:
           name: runserver
           command: python manage.py runserver
