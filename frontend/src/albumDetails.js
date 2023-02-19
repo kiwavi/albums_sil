@@ -39,6 +39,7 @@ export default function AlbumDetails () {
 
     
     useEffect(() => {
+        document.title = "Album Details";
         fetchAlbumPhotos();
     },[]);
     

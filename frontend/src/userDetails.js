@@ -42,6 +42,7 @@ export default function UserDetails() {
 
     useEffect(() => {
         fetchUserAlbums();
+        document.title = "User Albums";
     },[]);
     
     return (        

@@ -84,6 +84,7 @@ export default function PhotoDetail() {
     }
     
     useEffect(() => {
+        document.title = "Photo Details";
         fetchPhoto();
     },[]);
     
