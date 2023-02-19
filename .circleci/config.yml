@@ -15,18 +15,16 @@ jobs:
       - run:
           name: create virtual env
           command: python -m venv venv
-	  path: backend
       - run:
           name: install deps
           command: pip install -r requirements.txt
       - run:
           name: make migrations
           command: python manage.py makemigrations && python manage.py migrate
-	  path: backend
       - run:
           name: runserver
           command: python manage.py runserver
-	  path: backend
+
 
 workflows:
   build-and-test-workflow:
