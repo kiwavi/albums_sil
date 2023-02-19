@@ -14,7 +14,7 @@ jobs:
           command: npm run
       - run:
           name: create virtual env
-          command: cd ../backend && python -m venv venv
+          command: cd && cd backend && python -m venv venv
       - run:
           name: install deps
           command: pip install -r requirements.txt
