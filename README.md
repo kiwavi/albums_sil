@@ -18,5 +18,5 @@
 `chmod +x docker/backend/wsgi-entrypoint.sh    `    
 `sudo ./init-letsencrypt.sh    `    
 `sudo docker-compose -f docker-compose.prod.yml build    `    
-`sudo docker-compose down --remove-orphans    `
+`sudo docker-compose down --remove-orphans    `      
 `sudo docker-compose -f docker-compose.prod.yml up -d    `     
