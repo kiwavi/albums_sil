@@ -21,8 +21,7 @@ jobs:
           command: python manage.py makemigrations && python manage.py migrate
       - run:
           name: runserver
-          command: python manage.py runserver &
-	  
+          command: python manage.py runserver &	  
       - run:
           name: install dependencies
           command: cd ../frontend/ && ls && npm install
