@@ -9,7 +9,6 @@ jobs:
       - run:
           name: install dependencies
           command: npm install
-	  path: frontend
       - run:
           name: run tests
           command: npm run
