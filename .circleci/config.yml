@@ -8,16 +8,11 @@ jobs:
       - checkout
       - run:
           name: list directory
-          command: ls -a backend/
-      - run:
-          name: install dependencies
-          command: cd frontend && npm install
-      - run:
-          name: run tests
-          command: npm run
+          command: ls
+
       - run:
           name: create virtual env
-          command: cd && cd backend && python -m venv venv
+          command: cd backend && python -m venv venv
       - run:
           name: install deps
           command: pip install -r requirements.txt
@@ -26,7 +21,15 @@ jobs:
           command: python manage.py makemigrations && python manage.py migrate
       - run:
           name: runserver
-          command: python manage.py runserver
+          command: python manage.py runserver &
+	  
+      - run:
+          name: install dependencies
+          command: cd ../frontend/ && ls && npm install
+      - run:
+          name: run tests
+          command: npm run
+
 
 
 workflows:
