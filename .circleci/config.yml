@@ -11,10 +11,10 @@ jobs:
           command: cd frontend && ls && npm install
       - run:
           name: run tests
-          command: npm test
+          command: ENV CI=true && cd frontend && npm test && ENV CI=''
       - run:
           name: run app
-          command: npm run build
+          command: cd frontend && npm run build
 
 workflows:
   build-and-test-workflow:
