@@ -7,6 +7,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: list directory
+          command: ls -a backend/
+      - run:
           name: install dependencies
           command: cd frontend && npm install
       - run:
