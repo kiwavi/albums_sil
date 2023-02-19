@@ -10,13 +10,13 @@
 ### Open both files and customize the variables according to the corresponding environment (development or production). The EMAIL_HOST and EMAIL_HOST_USER variables cannot be empty.    
 ### Change the names of the files by removing the .example extensions in order for them to be recognized by the settings file. Also change the allowed hosts, cors_allowed_origins and csrf_trusted_origins in settings.py file to reflect your deployment environment    
 ### Build and run the docker image for development    
-sudo docker-compose build    
-docker-compose up -d
+`sudo docker-compose build    `
+`docker-compose up -d`
 ### For Production(follow the following steps)    
 ### Change hostname settings in init-letsencrypt file and docker-compose.prod.yml file.     
-chmod +x init-letsencrypt.sh    
-chmod +x docker/backend/wsgi-entrypoint.sh    
-sudo ./init-letsencrypt.sh    
-sudo docker-compose -f docker-compose.prod.yml build    
-sudo docker-compose down --remove-orphans    
-sudo docker-compose -f docker-compose.prod.yml up -d    
+`chmod +x init-letsencrypt.sh    `
+`chmod +x docker/backend/wsgi-entrypoint.sh    `
+`sudo ./init-letsencrypt.sh    `
+`sudo docker-compose -f docker-compose.prod.yml build    `
+`sudo docker-compose down --remove-orphans    `
+`sudo docker-compose -f docker-compose.prod.yml up -d    `
