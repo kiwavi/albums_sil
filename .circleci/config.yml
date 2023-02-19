@@ -9,10 +9,9 @@ jobs:
       - run:
           name: list directory
           command: ls
-
       - run:
-          name: create virtual env
-          command: cd backend && python -m venv venv
+          name: create virtual env and activate
+          command: cd backend && python -m venv venv && source venv/bin/activate
       - run:
           name: install deps
           command: pip install -r requirements.txt
@@ -21,7 +20,7 @@ jobs:
           command: python manage.py makemigrations && python manage.py migrate
       - run:
           name: runserver
-          command: python manage.py runserver &	  
+          command: python manage.py runserver	  
       - run:
           name: install dependencies
           command: cd ../frontend/ && ls && npm install
