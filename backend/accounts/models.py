@@ -37,7 +37,7 @@ class MyManager(EmailUserManager):
 class MyUser(EmailAbstractUser):
     # Custom fields
     date_of_birth = models.DateField('Date of birth', null=True, blank=True)
-    username = models.CharField(max_length=30, unique=True)
+    username = models.CharField(max_length=16, unique=True)
     # Required
     objects = MyManager()
     

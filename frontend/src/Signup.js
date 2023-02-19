@@ -21,7 +21,12 @@ export default function Signup () {
         e.preventDefault();
 
         if (logged) {
-            alert('You are logged in already');
+            NotificationManager.error('Logged in', 'You are logged in already',2000);
+            return;
+        }
+
+        if (username.length > 16) {
+            NotificationManager.error('Username too long','Username should have maximum 16 characters',2000);
             return;
         }
         
@@ -31,7 +36,7 @@ export default function Signup () {
         }
         
         if (password !== password2) {
-            alert('Passwords do not match.');
+            NotificationManager.error('Passwords mismatch.','Passwords do not match',2000);
             return;
         }                
 
