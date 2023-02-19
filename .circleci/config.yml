@@ -8,13 +8,13 @@ jobs:
       - checkout
       - run:
           name: install dependencies
-          command: npm install
+          command: cd frontend && npm install
       - run:
           name: run tests
           command: npm run
       - run:
           name: create virtual env
-          command: python -m venv venv
+          command: cd ../backend && python -m venv venv
       - run:
           name: install deps
           command: pip install -r requirements.txt
