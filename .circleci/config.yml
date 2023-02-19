@@ -7,28 +7,14 @@ jobs:
     steps:
       - checkout
       - run:
-          name: list directory
-          command: cat backend/requirements.txt && pip install -U pip setuptools virtualenv
-      - run:
-          name: create virtual env and activate
-          command: cd backend && python -m venv venv && source venv/bin/activate
-      - run:
-          name: install deps
-          command: pip install -r requirements.txt
-      - run:
-          name: make migrations
-          command: python manage.py makemigrations && python manage.py migrate
-      - run:
-          name: runserver
-          command: python manage.py runserver	  
-      - run:
           name: install dependencies
-          command: cd ../frontend/ && ls && npm install
+          command: cd frontend && ls && npm install
       - run:
           name: run tests
-          command: npm run
-
-
+          command: npm test
+      - run:
+          name: run app
+          command: npm run build
 
 workflows:
   build-and-test-workflow:
