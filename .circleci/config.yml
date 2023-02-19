@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: list directory
-          command: ls
+          command: ls backend/
       - run:
           name: create virtual env and activate
           command: cd backend && python -m venv venv && source venv/bin/activate
